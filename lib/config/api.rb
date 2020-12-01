@@ -1,22 +1,34 @@
-require 'net/http'
-require 'open-uri'
 require 'json'
 
 class Api
     def self.base_url
      "https://api.sportsdata.io/v3"
     end
+    
+    # def self.load_data
+    # data_of_champions
+    # end
 
-    def self.load_data
-     response = RestClient.get(base_url + '/lol/stats/json/Champions?key=aacc8ac9a58640728208a410e55e38d0')
-     data = JSON.parse(response.body)
+    def self.data_of_champions
+        response = RestClient.get(base_url + '/lol/stats/json/Champions?key=aacc8ac9a58640728208a410e55e38d0')
+        data = JSON.parse(response.body)
 
-     data.each do |data|
-        Champions.new(data[name])
-     binding.pry
+        data.each do |data|
+            new_data = data
+        
+            new_data.each do |idk|
+         Champions.new(idk)
+        #  Champions.new(data)
+        binding.pry
+            end
         end
+
+        end
+        
+    
     end
-end
+
+
 
 
 
